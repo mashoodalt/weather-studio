@@ -18,11 +18,11 @@ locations = {
 }
 
 
-
+weatherbit_key = st.secrets["WEATHERBIT_API_KEY"]
 
 # Function to get historical weather data from Weatherbit API
 def get_weather_data(lat, lon):
-    api_key = '762ee9f4f0ef4e7ebb8862f9b1427476'  # Replace YOUR_API_KEY with your actual Weatherbit API key
+    api_key = weatherbit_key  # Replace YOUR_API_KEY with your actual Weatherbit API key
     # Fetching data from the last 7 days
     end_date = pd.to_datetime('today').strftime('%Y-%m-%d')  # today's date as the end date
     start_date = (pd.to_datetime('today') - pd.Timedelta(days=7)).strftime('%Y-%m-%d')  # 7 days ago as the start date
@@ -62,8 +62,8 @@ def get_weather_data(lat, lon):
 
 # Some Open AI magic
 
-api_key = "sk-proj-6D1i4318S0sF56wfR9tsT3BlbkFJS3TfFZdpvl9j5mPJG9D7"
-
+# api_key = "sk-proj-6D1i4318S0sF56wfR9tsT3BlbkFJS3TfFZdpvl9j5mPJG9D7"
+api_key = st.secrets["OPENAI_API_KEY"]
 
 # The endpoint for the OpenAI API (specify if you are using a particular model or feature)
 url = 'https://api.openai.com/v1/chat/completions'
@@ -275,5 +275,6 @@ if st.button("Get Weather Data", type="primary"):
     # st.write(weather_data["data"])
     # st.write(severity)
     
+    print(response.json)
     
     
